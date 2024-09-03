@@ -1,0 +1,274 @@
+:root {
+    --primary-color: #000000;
+    --primary-light: #333333;
+    --secondary-color: #1A1A1A;
+    --background-start: #E6E8F5;
+    --background-end: #E6E8F5;
+    --chat-background: #FFFFFF;
+    --text-color: #000000;
+    --text-light: #4D4D4D;
+    --message-bot-bg: #E1F5FE;  
+    --message-user-bg: #E8F5E9;  /* Light green for user messages */
+    --message-user-color: #000000;
+    --error-color: #FF0000;
+    --error-bg: #FFE6E6;
+    --success-color: #008000;
+    --border-color: #B8BAC7;
+    --input-bg: #F5F5F5; 
+    --input-focus-bg: #FFFFFF;  
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, var(--background-start), var(--background-end));
+    color: var(--text-color);
+    height: 100%;
+    overflow: hidden;
+    line-height: 1.6;
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 100%;
+    margin: 0 auto;
+    background-color: var(--chat-background);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.chat-header {
+    background: var(--primary-color);
+    color: #FFFFFF;
+    padding: 20px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    margin-bottom: 20px;
+    padding: 14px 18px;
+    border-radius: 18px;
+    max-width: 75%;
+    word-wrap: break-word;
+    animation: fadeIn 0.3s ease-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.bot {
+    background-color: var(--message-bot-bg);
+    color: var(--text-color);
+    align-self: flex-start;
+    border-bottom-left-radius: 5px;
+}
+
+.user {
+    background-color: var(--message-user-bg);
+    color: var(--message-user-color);
+    align-self: flex-end;
+    border-bottom-right-radius: 5px;
+}
+
+.error {
+    background-color: var(--error-bg);
+    color: var(--error-color);
+    border: 1px solid var(--error-color);
+}
+
+/* Only apply margin when an error or success message follows the alter table */
+.alter-form + .error, .alter-form + .success {
+    margin-top: 20px;
+}
+
+.input-container {
+    display: flex;
+    padding: 20px;
+    background-color: var(--chat-background);
+    border-top: 1px solid var(--border-color);
+}
+
+#userInput {
+    flex-grow: 1;
+    padding: 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 25px;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s;
+    background-color: var(--input-bg);
+}
+
+#userInput:focus {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 3px rgba(76, 92, 104, 0.1);
+    background-color: var(--input-focus-bg);
+}
+
+button {
+    background-color: var(--primary-color);
+    color: #FFFFFF;
+    border: none;
+    padding: 14px 28px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 25px;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+button:hover {
+    background-color: #CED0DB;
+    color: #000000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+button:disabled {
+    background-color: var(--text-light);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: var(--chat-background);
+}
+
+#alterButton, #confirmButton {
+    flex: 1;
+    margin: 0 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 20px;
+    background-color: var(--chat-background);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+th, td {
+    border: 1px solid var(--border-color);
+    padding: 14px;
+    text-align: left;
+}
+
+th {
+    background-color: var(--primary-color);
+    color: #FFFFFF;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.hidden {
+    display: none;
+}
+
+textarea, select, .alter-form input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 16px;
+    resize: vertical;
+    outline: none;
+    transition: all 0.3s;
+    background-color: var(--input-bg);
+}
+
+textarea:focus, select:focus, .alter-form input:focus {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 3px rgba(76, 92, 104, 0.1);
+    background-color: var(--input-focus-bg);
+}
+
+.alter-form {
+    padding: 20px;
+    background-color: var(--chat-background);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+}
+
+.alter-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.alter-form select, .alter-form input, .alter-form textarea {
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .chat-header {
+        font-size: 20px;
+        padding: 15px;
+    }
+
+    .message {
+        max-width: 85%;
+    }
+
+    button {
+        padding: 12px 24px;
+    }
+}
+
+@media (min-width: 768px) {
+    body, html {
+        background-attachment: fixed;
+    }
+
+    .chat-container {
+        max-width: 90%;
+        height: 90vh;
+        margin: 5vh auto;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+}
+
+@media (min-width: 1024px) {
+    .chat-container {
+        max-width: 1000px;
+    }
+}
+/* Apply margin only to error or success messages after the alter-form */
+.alter-form + .error,
+.alter-form + .success {
+    margin-top: 20px; /* Adjust the margin value as needed */
+}
